@@ -62,7 +62,8 @@ with gr.Blocks(title="PPE Detector & Gemini") as app:
     gr.Markdown("تقوم هذه الواجهة برسم مربعات التحديد على الأشخاص، ثم ترسل الصورة إلى **Gemini Vision** لكتابة تقرير أمان دقيق.")
     
     with gr.Row():
-        api_key_input = gr.Textbox(label="مفتاح Gemini API Key", type="password", value=os.environ.get("GEMINI_API_KEY", ""))
+        has_key = bool(os.environ.get("GEMINI_API_KEY"))
+        api_key_input = gr.Textbox(label="مفتاح Gemini API Key", type="password", value=os.environ.get("GEMINI_API_KEY", ""), visible=not has_key)
 
         
     with gr.Row():
