@@ -64,37 +64,57 @@ def generate_safety_report(detections):
     report_lines.append(f"- عدد الأشخاص المكتشفين: **{persons} شخص**")
     report_lines.append(f"- إجمالي المخالفات المكتشفة: **{no_hardhat + no_vest + no_mask + no_gloves + no_boots} مخالفة**")
 
-    report_lines.append(f"\n🔍 **تفاصيل المعدات المكتشفة:**")
+    report_lines.append(f"\n🔍 **تفاصيل المعدات (كل معدة على حدة):**")
 
-    # الخوذة
-    if hardhat > 0:
-        report_lines.append(f"✅ الخوذة (Hardhat): يرتديها {hardhat} شخص")
-    if no_hardhat > 0:
-        report_lines.append(f"❌ الخوذة (Hardhat): {no_hardhat} شخص **لا يرتديها** - خطر إصابات الرأس!")
+    # الخوذة - دائماً تظهر
+    if hardhat > 0 and no_hardhat == 0:
+        report_lines.append(f"✅ الخوذة (Hardhat): موجودة ({hardhat} شخص يرتديها)")
+    elif hardhat > 0 and no_hardhat > 0:
+        report_lines.append(f"⚠️ الخوذة (Hardhat): {hardhat} يرتديها | {no_hardhat} لا يرتديها ❌")
+    elif no_hardhat > 0:
+        report_lines.append(f"❌ الخوذة (Hardhat): غائبة - {no_hardhat} شخص لا يرتديها!")
+    else:
+        report_lines.append(f"➖ الخوذة (Hardhat): لم يتم اكتشافها في الصورة")
 
-    # السترة العاكسة
-    if vest > 0:
-        report_lines.append(f"✅ السترة العاكسة (Safety Vest): يرتديها {vest} شخص")
-    if no_vest > 0:
-        report_lines.append(f"❌ السترة العاكسة (Safety Vest): {no_vest} شخص **لا يرتديها** - خطر عدم الرؤية!")
+    # السترة العاكسة - دائماً تظهر
+    if vest > 0 and no_vest == 0:
+        report_lines.append(f"✅ السترة العاكسة (Safety Vest): موجودة ({vest} شخص يرتديها)")
+    elif vest > 0 and no_vest > 0:
+        report_lines.append(f"⚠️ السترة العاكسة (Safety Vest): {vest} يرتديها | {no_vest} لا يرتديها ❌")
+    elif no_vest > 0:
+        report_lines.append(f"❌ السترة العاكسة (Safety Vest): غائبة - {no_vest} شخص لا يرتديها!")
+    else:
+        report_lines.append(f"➖ السترة العاكسة (Safety Vest): لم يتم اكتشافها في الصورة")
 
-    # الكمامة
-    if mask > 0:
-        report_lines.append(f"✅ الكمامة (Mask): يرتديها {mask} شخص")
-    if no_mask > 0:
-        report_lines.append(f"❌ الكمامة (Mask): {no_mask} شخص **لا يرتديها** - خطر التنفس!")
+    # الكمامة - دائماً تظهر
+    if mask > 0 and no_mask == 0:
+        report_lines.append(f"✅ الكمامة (Mask): موجودة ({mask} شخص يرتديها)")
+    elif mask > 0 and no_mask > 0:
+        report_lines.append(f"⚠️ الكمامة (Mask): {mask} يرتديها | {no_mask} لا يرتديها ❌")
+    elif no_mask > 0:
+        report_lines.append(f"❌ الكمامة (Mask): غائبة - {no_mask} شخص لا يرتديها!")
+    else:
+        report_lines.append(f"➖ الكمامة (Mask): لم يتم اكتشافها في الصورة")
 
-    # القفازات
-    if gloves > 0:
-        report_lines.append(f"✅ القفازات (Gloves): يرتديها {gloves} شخص")
-    if no_gloves > 0:
-        report_lines.append(f"❌ القفازات (Gloves): {no_gloves} شخص **لا يرتديها**!")
+    # القفازات - دائماً تظهر
+    if gloves > 0 and no_gloves == 0:
+        report_lines.append(f"✅ القفازات (Gloves): موجودة ({gloves} شخص يرتديها)")
+    elif gloves > 0 and no_gloves > 0:
+        report_lines.append(f"⚠️ القفازات (Gloves): {gloves} يرتديها | {no_gloves} لا يرتديها ❌")
+    elif no_gloves > 0:
+        report_lines.append(f"❌ القفازات (Gloves): غائبة - {no_gloves} شخص لا يرتديها!")
+    else:
+        report_lines.append(f"➖ القفازات (Gloves): لم يتم اكتشافها في الصورة")
 
-    # الأحذية
-    if boots > 0:
-        report_lines.append(f"✅ الأحذية الواقية (Boots): يرتديها {boots} شخص")
-    if no_boots > 0:
-        report_lines.append(f"❌ الأحذية الواقية (Boots): {no_boots} شخص **لا يرتديها**!")
+    # الأحذية - دائماً تظهر
+    if boots > 0 and no_boots == 0:
+        report_lines.append(f"✅ الأحذية الواقية (Boots): موجودة ({boots} شخص يرتديها)")
+    elif boots > 0 and no_boots > 0:
+        report_lines.append(f"⚠️ الأحذية الواقية (Boots): {boots} يرتديها | {no_boots} لا يرتديها ❌")
+    elif no_boots > 0:
+        report_lines.append(f"❌ الأحذية الواقية (Boots): غائبة - {no_boots} شخص لا يرتديها!")
+    else:
+        report_lines.append(f"➖ الأحذية الواقية (Boots): لم يتم اكتشافها في الصورة")
 
     # الحكم النهائي
     total_violations = no_hardhat + no_vest + no_mask + no_gloves + no_boots
